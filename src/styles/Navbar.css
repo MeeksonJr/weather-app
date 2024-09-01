@@ -1,0 +1,34 @@
+.navbar {
+  margin-top: 20px;
+  border-radius: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #000;
+    color: #fff;
+  }
+  
+  .logo {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  header button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #007aff; /* Blue color for buttons */
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: 0.6s ease ease-in-out all;
+  }
+  
+  header button:hover {
+    background: #0051a8; /* Darker blue on hover */
+  }
+  

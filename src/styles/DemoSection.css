@@ -1,0 +1,39 @@
+.demo-section {
+  text-align: center;
+  margin: 20px;
+}
+
+.demo-section h2 {
+  margin-bottom: 20px;
+}
+
+.demo-section input {
+  padding: 8px;
+  font-size: 16px;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.forecast-container {
+  display: flex;
+  overflow-x: auto; /* Allows horizontal scrolling if needed */
+  gap: 20px; /* Space between forecast items */
+  padding: 10px;
+  justify-content: center;
+}
+
+.forecast-day {
+  flex: 1;
+  min-width: 150px; /* Adjust as needed */
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: shadow for better visual separation */
+}
+
+.forecast-day p {
+  margin: 5px 0;
+}

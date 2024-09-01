@@ -1,0 +1,71 @@
+/* MainMenu.css */
+.main-menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  text-align: center;
+  background: #f8f9fa; /* Light background */
+  color: #333; /* Dark text */
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+}
+
+header {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+header button {
+  background: #007aff; /* Blue color for buttons */
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 20px;
+  margin: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+header button:hover {
+  background: #0051a8; /* Darker blue on hover */
+}
+
+h1 {
+  margin: 20px 0;
+  font-size: 2.5rem;
+  font-weight: 600;
+}
+
+p {
+  margin: 10px 0;
+  font-size: 1.2rem;
+  color: #666;
+}
+
+.main-menu-buttons {
+  margin-top: 20px;
+}
+
+.main-menu-buttons button {
+  background: #007aff; /* Blue color for main button */
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 15px 30px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.main-menu-buttons button:hover {
+  background: #0051a8; /* Darker blue on hover */
+  transform: scale(1.05); /* Slightly enlarge button on hover */
+}
+
+.main-menu-buttons button:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(0, 122, 255, 0.5); /* Focus ring */
+}
