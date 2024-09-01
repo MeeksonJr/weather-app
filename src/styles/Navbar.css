@@ -18,7 +18,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #007aff; /* Blue color for buttons */
+    background: #007aff;
     color: white;
     border: none;
     border-radius: 10px;
@@ -29,6 +29,6 @@
   }
   
   header button:hover {
-    background: #0051a8; /* Darker blue on hover */
+    background: #0051a8;
   }
   

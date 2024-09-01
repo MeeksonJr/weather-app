@@ -7,31 +7,36 @@
   margin-bottom: 20px;
 }
 
+/* Full width on smaller devices */
+/* Adjust the maximum width as needed */
+/* Include padding and border in the element's total width and height */
 .weather-form input {
   padding: 8px;
   font-size: 16px;
-  width: 100%; /* Full width on smaller devices */
-  max-width: 400px; /* Adjust the maximum width as needed */
-  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+  width: 100%; 
+  max-width: 400px; 
+  box-sizing: border-box; 
 }
 
 .weather-form button {
   padding: 8px 6px;
   font-size: 16px;
   cursor: pointer;
-  border: 2px solid #007bff; /* Solid border color */
-  border-radius: 10px; /* Rounded corners */
-  background-color: transparent; /* Transparent background */
-  color: #007bff; /* Text color matching border */
-  transition: background-color 0.3s, color 0.3s; /* Smooth transitions for background and text color */
-  width: 100%; /* Full width on smaller devices */
-  max-width: 200px; /* Adjust the maximum width as needed */
-  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+  border: 2px solid #007bff; 
+  border-radius: 10px; 
+  background-color: transparent; 
+  color: #007bff; 
+  transition: background-color 0.3s, color 0.3s; 
+  width: 100%; 
+  max-width: 200px; 
+  box-sizing: border-box; 
+  margin-left: 5px;
 }
 
 .weather-form button:hover {
-  background-color: #007bff; /* Highlight color on hover */
-  color: white; /* Text color on hover */
+  /* Highlight color on hover */
+  background-color: #007bff; 
+  color: white; 
 }
 
 .weather-info, .forecast-info {
@@ -58,22 +63,24 @@
 
 .forecast-container {
   display: flex;
-  flex-wrap: wrap; /* Wrap items to next line on small screens */
-  gap: 20px; /* Space between forecast items */
+  /* Wrap items to next line on small screens */
+  flex-wrap: wrap; 
+  /* Space between forecast items */
+  gap: 20px; 
   padding: 10px;
   justify-content: center;
 }
 
 .forecast-day {
   flex: 1;
-  min-width: 150px; /* Adjust as needed */
-  max-width: 200px; /* Adjust as needed */
+  min-width: 150px; 
+  max-width: 200px; 
   padding: 15px;
   border: 1px solid #ddd;
   border-radius: 8px;
   background-color: #f9f9f9;
   text-align: center;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: shadow for better visual separation */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
 }
 
 .forecast-day p {
@@ -94,8 +101,8 @@
 }
 
 .forecast-day.highlighted {
-  background-color: #d0e0f0; /* Highlight color */
-  border-color: #007bff; /* Highlight border color */
+  background-color: #d0e0f0; 
+  border-color: #007bff; 
 }
 
 .day-detail {
@@ -109,32 +116,32 @@
 @media (max-width: 768px) {
   .weather-form input,
   .weather-form button {
-    max-width: 100%; /* Full width on small screens */
-    font-size: 14px; /* Adjust font size for better fit */
+    max-width: 100%; 
+    font-size: 14px; 
   }
   
   .weather-form button {
-    max-width: 150px; /* Adjust button width */
+    max-width: 150px;
   }
 
   .forecast-container {
     align-items: center;
-    flex-direction: column; /* Stack forecast items vertically */
-    gap: 10px; /* Space between items */
+    flex-direction: column;
+    gap: 10px; 
   }
 
   .forecast-day {
-    min-width: auto; /* Allow items to adjust width */
-    width: 100%; /* Full width on smaller screens */
-    min-width: 50px; /* Adjust as needed */
-    max-width: 300px; /* Adjust as needed */
+    min-width: auto; 
+    width: 100%; 
+    min-width: 50px; 
+    max-width: 300px; 
   
   }
 }
 
 @media (max-width: 480px) {
   .weather-info img {
-    width: 40px; /* Smaller icon on very small screens */
+    width: 40px; 
     height: 40px;
   }
 }

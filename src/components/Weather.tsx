@@ -113,7 +113,8 @@ const Weather: React.FC = () => {
 
   useEffect(() => {
     getUserLocation();
-    fetchForecastData('New York'); // Default city for the demo forecast
+    // Default city for the demo forecast
+    fetchForecastData('New York'); 
   }, []);
 
   return (
