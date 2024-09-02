@@ -1,13 +1,13 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './App.tsx';
-import { ClerkProvider } from '@clerk/clerk-react';
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import App from './App.tsx'
+import { ClerkProvider } from '@clerk/clerk-react'
 
-// Hardcoded publishable key
-const PUBLISHABLE_KEY = 'pk_test_Y2FyaW5nLXJhY2Nvb24tNjAuY2xlcmsuYWNjb3VudHMuZGV2JA';
+// Import your publishable key Here \|/
+const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
 
 if (!PUBLISHABLE_KEY) {
-  throw new Error('Missing Publishable Key');
+  throw new Error('Missing Publishable Key')
 }
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
@@ -16,4 +16,4 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       <App />
     </ClerkProvider>
   </React.StrictMode>,
-);
+)
