@@ -39,7 +39,7 @@
   color: white; 
 }
 
-.weather-info, .forecast-info {
+.weather-info, .forecast-container {
   text-align: center;
   margin: 20px;
   padding: 20px;
@@ -48,7 +48,7 @@
   background-color: #f9f9f9;
 }
 
-.weather-info h2, .forecast-info h3 {
+.weather-info h2, .forecast-container h2 {
   margin-bottom: 10px;
 }
 
@@ -57,11 +57,11 @@
   height: 50px;
 }
 
-.forecast-info {
+.forecast-container {
   margin-top: 30px;
 }
 
-.forecast-container {
+.forecast-list {
   display: flex;
   /* Wrap items to next line on small screens */
   flex-wrap: wrap; 
@@ -71,7 +71,7 @@
   justify-content: center;
 }
 
-.forecast-day {
+.forecast-item {
   flex: 1;
   min-width: 150px; 
   max-width: 200px; 
@@ -81,26 +81,19 @@
   background-color: #f9f9f9;
   text-align: center;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+  cursor: pointer;
+  transition: background-color 0.3s, border-color 0.3s;
 }
 
-.forecast-day p {
+.forecast-item p {
   margin: 5px 0;
 }
 
-.forecast-day {
-  cursor: pointer;
-  border: 1px solid #ccc;
-  padding: 10px;
-  margin: 5px;
-  border-radius: 5px;
-  transition: background-color 0.3s;
-}
-
-.forecast-day:hover {
+.forecast-item:hover {
   background-color: #f0f0f0;
 }
 
-.forecast-day.highlighted {
+.forecast-item.selected {
   background-color: #d0e0f0; 
   border-color: #007bff; 
 }
@@ -124,18 +117,17 @@
     max-width: 150px;
   }
 
-  .forecast-container {
+  .forecast-list {
     align-items: center;
     flex-direction: column;
     gap: 10px; 
   }
 
-  .forecast-day {
+  .forecast-item {
     min-width: auto; 
     width: 100%; 
     min-width: 50px; 
     max-width: 300px; 
-  
   }
 }
 
