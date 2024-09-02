@@ -123,6 +123,13 @@ const Weather: React.FC = () => {
     fetchForecastData('New York'); // Default city for the demo forecast
   }, []);
 
+  // Format date and day for display
+  const formatDate = (timestamp: number) => {
+    const date = new Date(timestamp * 1000);
+    const options: Intl.DateTimeFormatOptions = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
+    return date.toLocaleDateString(undefined, options);
+  };
+
   return (
     <div className="weather-container">
       <form onSubmit={handleSearch} className="weather-form">
@@ -141,8 +148,8 @@ const Weather: React.FC = () => {
       <div className="weather-info">
         {selectedDay ? (
           <>
-            <h2>{weatherData.location.name}, {weatherData.location.country}</h2> {/* Preserve location title */}
-            <h3>{new Date(selectedDay.dt * 1000).toLocaleDateString()}</h3>
+            <h2>{weatherData.location.name}, {weatherData.location.country}</h2>
+            <h3>{formatDate(selectedDay.dt)}</h3>
             <p>Temperature: {celsiusToFahrenheit(selectedDay.main.temp).toFixed(1)}°F</p>
             <p>Condition: {selectedDay.weather[0].description}</p>
             {selectedDay.weather[0].icon && (
@@ -174,12 +181,13 @@ const Weather: React.FC = () => {
               className={`forecast-day ${selectedDay && selectedDay.dt === day.dt ? 'highlighted' : ''}`}
               onClick={() => handleDayClick(day)}
             >
-              <p>{new Date(day.dt * 1000).toLocaleDateString()}</p>
+              <p>{weatherData ? weatherData.location.name : "Location"}</p>
+              <p>{formatDate(day.dt)}</p>
+              {day.weather[0].icon && (
+                <img src={day.weather[0].icon} alt="Weather icon" />
+              )}
               <p>{celsiusToFahrenheit(day.main.temp).toFixed(1)}°F</p>
               <p>{day.weather[0].description}</p>
-              {day.weather[0].icon && (
-                <img src={day.weather[0].icon} alt="Weather icon" className="forecast-icon" />
-              )}
             </div>
           ))}
         </div>
