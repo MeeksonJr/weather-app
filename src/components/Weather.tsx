@@ -19,15 +19,6 @@ const Weather: React.FC = () => {
   const [selectedDay, setSelectedDay] = useState<any>(null);
   const [userLocation, setUserLocation] = useState<{ lat: number; lon: number } | null>(null);
 
-  const [defaultForecast] = useState<ForecastData['list']>([
-    { dt: 0, main: { temp: 20, temp_max: 22, temp_min: 18 }, weather: [{ description: 'Sunny', icon: 'http://openweathermap.org/img/wn/01d.png' }] },
-    { dt: 86400, main: { temp: 22, temp_max: 24, temp_min: 20 }, weather: [{ description: 'Partly Cloudy', icon: 'http://openweathermap.org/img/wn/02d.png' }] },
-    { dt: 172800, main: { temp: 18, temp_max: 20, temp_min: 16 }, weather: [{ description: 'Rainy', icon: 'http://openweathermap.org/img/wn/10d.png' }] },
-    { dt: 259200, main: { temp: 21, temp_max: 23, temp_min: 19 }, weather: [{ description: 'Thunderstorms', icon: 'http://openweathermap.org/img/wn/11d.png' }] },
-    { dt: 345600, main: { temp: 19, temp_max: 21, temp_min: 17 }, weather: [{ description: 'Clear', icon: 'http://openweathermap.org/img/wn/01d.png' }] },
-    { dt: 432000, main: { temp: 20, temp_max: 22, temp_min: 18 }, weather: [{ description: 'Cloudy', icon: 'http://openweathermap.org/img/wn/03d.png' }] },
-    { dt: 518400, main: { temp: 23, temp_max: 25, temp_min: 21 }, weather: [{ description: 'Windy', icon: 'http://openweathermap.org/img/wn/50d.png' }] },
-  ]);
 
   // Temperature conversion function
   const celsiusToFahrenheit = (celsius: number) => (celsius * 9/5) + 32;
