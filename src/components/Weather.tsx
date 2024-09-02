@@ -5,8 +5,8 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 interface ForecastData {
   list: {
     dt: number;
-    main: { temp: number };
-    weather: { description: string; icon: string }[];
+    main: { temp: number; humidity?: number; wind_kph?: number };
+    weather: { description: string; icon?: string }[];
   }[];
 }
 
@@ -52,14 +52,20 @@ const Weather: React.FC = () => {
   };
 
   // Fetch forecast data function
-  const fetchForecastData = async (location: string) => {
+  const fetchForecastData = async (location: string | null, lat?: number, lon?: number) => {
     try {
       const apiKey = '4b0204496c884566a1604653240109';
-      const response = await fetch(`http://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${location}&days=7&aqi=no&alerts=no`);
+      let url = '';
+      if (lat && lon) {
+        url = `http://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${lat},${lon}&days=7&aqi=no&alerts=no`;
+      } else if (location) {
+        url = `http://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${location}&days=7&aqi=no&alerts=no`;
+      }
+      const response = await fetch(url);
       const data = await response.json();
       setForecastData(data.forecast.forecastday.map((day: any) => ({
         dt: new Date(day.date).getTime() / 1000,
-        main: { temp: day.day.avgtemp_c },
+        main: { temp: day.day.avgtemp_c, humidity: day.day.avghumidity, wind_kph: day.day.maxwind_kph },
         weather: [{ description: day.day.condition.text, icon: day.day.condition.icon }],
       })));
     } catch (error) {
@@ -77,11 +83,11 @@ const Weather: React.FC = () => {
     e.preventDefault();
     if (userLocation && !location) {
       fetchWeatherData(null, userLocation.lat, userLocation.lon);
-      fetchForecastData(`${userLocation.lat},${userLocation.lon}`);
+      fetchForecastData(null, userLocation.lat, userLocation.lon);
     } else if (location) {
       fetchWeatherData(location);
       fetchForecastData(location);
-      setSelectedDay(null); 
+      setSelectedDay(null); // Reset selected day when changing location
     }
   };
 
@@ -100,7 +106,8 @@ const Weather: React.FC = () => {
             lon: position.coords.longitude,
           });
           fetchWeatherData(null, position.coords.latitude, position.coords.longitude);
-          fetchForecastData(`${position.coords.latitude},${position.coords.longitude}`);
+          fetchForecastData(null, position.coords.latitude, position.coords.longitude);
+          setLocation("Current Location");  // Update input field to "Current Location"
         },
         (error) => {
           console.error('Error getting location:', error);
@@ -113,8 +120,7 @@ const Weather: React.FC = () => {
 
   useEffect(() => {
     getUserLocation();
-    // Default city for the demo forecast
-    fetchForecastData('New York'); 
+    fetchForecastData('New York'); // Default city for the demo forecast
   }, []);
 
   return (
@@ -127,21 +133,23 @@ const Weather: React.FC = () => {
           placeholder="Enter location" 
         />
         <button type="submit">Get Weather</button>
-        <div className="location-icon" onClick={getUserLocation}>
-          <i className="fas fa-location-arrow"></i>
-          <span className="tooltip">Current Location</span>
-        </div>
+        <button type="button" onClick={getUserLocation} className="location-button">
+          <i className="fas fa-map-marker-alt"></i>
+        </button>
       </form>
 
       <div className="weather-info">
         {selectedDay ? (
           <>
-            <h2>{weatherData?.location?.name || 'Weather'} - {weatherData?.location?.country || ''}</h2>
+            <h2>{weatherData.location.name}, {weatherData.location.country}</h2> {/* Preserve location title */}
+            <h3>{new Date(selectedDay.dt * 1000).toLocaleDateString()}</h3>
             <p>Temperature: {celsiusToFahrenheit(selectedDay.main.temp).toFixed(1)}°F</p>
             <p>Condition: {selectedDay.weather[0].description}</p>
-            <img src={`http:${selectedDay.weather[0].icon}`} alt="Weather icon" />
-            <p>Humidity: {weatherData?.current?.humidity}%</p>
-            <p>Wind: {kphToMph(weatherData?.current?.wind_kph || 0).toFixed(1)} mph</p>
+            {selectedDay.weather[0].icon && (
+              <img src={selectedDay.weather[0].icon} alt="Weather icon" />
+            )}
+            <p>Humidity: {selectedDay.main.humidity}%</p>
+            <p>Wind: {kphToMph(selectedDay.main.wind_kph).toFixed(1)} mph</p>
           </>
         ) : (
           weatherData && (
@@ -149,7 +157,7 @@ const Weather: React.FC = () => {
               <h2>{weatherData.location.name}, {weatherData.location.country}</h2>
               <p>Temperature: {celsiusToFahrenheit(weatherData.current.temp_c).toFixed(1)}°F</p>
               <p>Condition: {weatherData.current.condition.text}</p>
-              <img src={`http:${weatherData.current.condition.icon}`} alt="Weather icon" />
+              <img src={weatherData.current.condition.icon} alt="Weather icon" />
               <p>Humidity: {weatherData.current.humidity}%</p>
               <p>Wind: {kphToMph(weatherData.current.wind_kph).toFixed(1)} mph</p>
             </>
@@ -167,9 +175,11 @@ const Weather: React.FC = () => {
               onClick={() => handleDayClick(day)}
             >
               <p>{new Date(day.dt * 1000).toLocaleDateString()}</p>
+              <p>{celsiusToFahrenheit(day.main.temp).toFixed(1)}°F</p>
               <p>{day.weather[0].description}</p>
-              <img src={`http:${day.weather[0].icon}`} alt="Weather icon" />
-              <p>Temp: {celsiusToFahrenheit(day.main.temp).toFixed(1)}°F</p>
+              {day.weather[0].icon && (
+                <img src={day.weather[0].icon} alt="Weather icon" className="forecast-icon" />
+              )}
             </div>
           ))}
         </div>
